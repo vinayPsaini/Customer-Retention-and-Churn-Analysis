@@ -1,0 +1,7 @@
+churn_rate = [total_churn]/[total_customers]
+
+new_joiners = CALCULATE(COUNT('public prod_churn'[customer_id]),'public prod_churn'[customer_status] = "Joined")
+
+total_churn = sum('public prod_churn'[churn_status])
+
+total_customers = CALCULATE(COUNT('public prod_churn'[customer_id]))

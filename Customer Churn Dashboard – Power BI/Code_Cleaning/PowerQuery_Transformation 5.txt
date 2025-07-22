@@ -1,0 +1,8 @@
+let
+    Source = #"public prod_churn",
+    #"Unpivoted Columns" = Table.UnpivotOtherColumns(Source, {"customer_id", "gender", "age", "married", "state", "number_of_referrals", "tenure_in_months", "value_deal", "internet_type", "contract", "payment_method", "monthly_charge", "total_charges", "total_refunds", "total_extra_data_charges", "total_long_distance_charges", "total_revenue", "customer_status", "churn_category", "churn_reason", "churn_status", "monthly_charge_status"}, "Attribute", "Value"),
+    #"Renamed Columns" = Table.RenameColumns(#"Unpivoted Columns",{{"Attribute", "Services"}, {"Value", "Status"}}),
+    #"Replaced Value" = Table.ReplaceValue(#"Renamed Columns","_"," ",Replacer.ReplaceText,{"Services"}),
+    #"Capitalized Each Word" = Table.TransformColumns(#"Replaced Value",{{"Services", Text.Proper, type text}})
+in
+    #"Capitalized Each Word"

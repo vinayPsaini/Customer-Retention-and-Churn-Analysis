@@ -1,0 +1,16 @@
+## 💡 Final Insights
+
+- **Gender**: Female customers have higher churn (64%)
+- **Age**: Seniors (Above 80 yrs) have the highest churn rate (44.6%)
+- **Top States by Churn Rate**: 
+  - Jammu & Kashmir (57.2%)
+  - Assam (38.1%)
+  - Jharkhand (34.5%)
+- **Contract Type**:
+  - Month-to-Month users churn the most (46.5%)
+  - 2-Year contracts reduce churn drastically (2.7%)
+- **Internet & Services**:
+  - Fiber Optic users: 41.1% churn
+  - Internet Service (93.71%), Phone Service (90.59%), Unlimited Data (80.08%) linked to high churn
+- **Churn Drivers**:
+  - Price, Customer Support, and Product Dissatisfaction are top reasons

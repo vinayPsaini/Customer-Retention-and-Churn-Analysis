@@ -1,0 +1,17 @@
+let
+    Source = #"public prod_churn",
+    #"Removed Other Columns" = Table.SelectColumns(Source,{"age"}),
+    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns"),
+    #"Added Custom" = Table.AddColumn(#"Removed Duplicates", "age_group", each if [age] < 20 then "<20"
+else if [age] < 40 then "20-40"
+else if [age] < 60 then "40-60"
+else if [age] < 80 then "60-80"
+else  ">80"),
+    #"Added Custom1" = Table.AddColumn(#"Added Custom", "age_group_sorting", each if [age] < 20 then "1"
+else if [age] <40 then "2"
+else if [age] <60 then "3"
+else if [age] <80 then "4"
+else "5"),
+    #"Changed Type" = Table.TransformColumnTypes(#"Added Custom1",{{"age_group_sorting", Int64.Type}})
+in
+    #"Changed Type"

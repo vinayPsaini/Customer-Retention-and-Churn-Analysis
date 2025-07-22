@@ -1,0 +1,12 @@
+let
+    Source = PostgreSQL.Database("localhost:5432", "db_churn"),
+    public_prod_churn = Source{[Schema="public",Item="prod_churn"]}[Data],
+    #"Added Custom" = Table.AddColumn(public_prod_churn, "churn_status", each if [customer_status] = "Churned" then 1 else 0),
+    #"Changed Type" = Table.TransformColumnTypes(#"Added Custom",{{"churn_status", Int64.Type}}),
+    #"Added Custom1" = Table.AddColumn(#"Changed Type", "monthly_charge_status", each if [monthly_charge] < 20 then "<20"
+else if [monthly_charge] < 40 then "20-40"
+else if [monthly_charge] < 60 then "40-60"
+else if [monthly_charge] < 80 then "80-100"
+else ">100")
+in
+    #"Added Custom1"
